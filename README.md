@@ -1,4 +1,5 @@
 # cargo-mdb
+[![crates.io](https://img.shields.io/crates/v/cargo-mdb)](https://crates.io/crates/cargo-mdb)
 
 Cargo extension for running the [mdb](https://github.com/TomMelt/mdb) debugger.
 
