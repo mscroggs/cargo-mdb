@@ -42,7 +42,7 @@ fn main() {
     assert_eq!(input_args[1], "mdb");
     let mut input_args = input_args[2..].iter();
 
-    let mut port = 3000;
+    let mut port = None;
     let mut nprocesses = 2;
     let mut file = None;
 
@@ -57,11 +57,13 @@ fn main() {
                     .expect("Value following -n must be an integer");
             }
             "-p" => {
-                port = input_args
-                    .next()
-                    .expect("-p must be followed by a value")
-                    .parse::<usize>()
-                    .expect("Value following -p must be an integer");
+                port = Some(
+                    input_args
+                        .next()
+                        .expect("-p must be followed by a value")
+                        .parse::<usize>()
+                        .expect("Value following -p must be an integer"),
+                );
             }
             "--release" => {
                 // TODO: warning here rather than panic
@@ -109,6 +111,9 @@ fn main() {
         FileToRun::Example(e) => format!("./target/debug/examples/{e}"),
         FileToRun::Bin(e) => format!("./target/debug/{e}"),
     };
-    let launch_command = format!("mdb launch -t {target} -p {port} -b rust-gdb -n {nprocesses}");
+    let mut launch_command = format!("mdb launch -t {target} -b rust-gdb -n {nprocesses}");
+    if let Some(p) = port {
+        launch_command = format!("{launch_command} -p {p}");
+    }
     let _ = run_command(&launch_command);
 }
