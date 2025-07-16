@@ -1,0 +1,18 @@
+[features]
+strict = []
+
+[package]
+name = "cargo-mdb"
+version = "0.1.0"
+edition = "2024"
+authors = ["Matthew Scroggs <rust@mscroggs.co.uk>"]
+description = "Cargo extension for running parallel debugger mdb."
+license = "MIT"
+homepage = "https://github.com/mscroggs/cargo-mdb"
+repository = "https://github.com/mscroggs/cargo-mdb"
+readme = "README.md"
+keywords = ["examples", "cargo"]
+categories = ["development-tools::cargo-plugins"]
+
+[lints.clippy]
+wildcard_imports = "forbid"
