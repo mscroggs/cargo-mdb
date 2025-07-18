@@ -15,6 +15,14 @@ fn version_leq(v0: &[usize], v1: &[usize]) -> bool {
     }
 }
 
+/// Format version as string
+fn version_str(v: &[usize]) -> String {
+    v.iter()
+        .map(|i| format!("{i}"))
+        .collect::<Vec<_>>()
+        .join(".")
+}
+
 fn main() {
     #[cfg(target_os = "windows")]
     let mut shell = Command::new("cmd /C");
@@ -37,16 +45,19 @@ fn main() {
         );
     }
 
+    // TODO: update min version to [1, 0, 5] once mdb has next release
+    let min_version = [1, 0, 4];
     let version = str::from_utf8(&output.stdout)
         .expect("")
         .replace("\n", "")
         .split(".")
         .map(|i| i.parse::<usize>().expect(""))
         .collect::<Vec<_>>();
-    if version_leq(&version, &[1, 0, 4]) {
-        // TODO: update this line to [1, 0, 5] once mdb has next release
+    if !version_leq(&min_version, &version) {
         panic!(
-            "mdb version must be 1.0.5 or higher. Try upgrading with `pip install --upgrade git+https://github.com/TomMelt/mdb`."
+            "Found mdb. version {}\nmdb version must be {} or higher. Try upgrading with `pip install --upgrade git+https://github.com/TomMelt/mdb`.",
+            version_str(&version),
+            version_str(&min_version),
         );
     }
 }
