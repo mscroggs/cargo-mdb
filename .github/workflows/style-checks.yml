@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install mdb
-        run: python3 -m pip install https://github.com/mscroggs/mdb.git
+        run: python3 -m pip install git+https://github.com/mscroggs/mdb.git
       - name: Rust style checks
         run: |
           cargo fmt -- --check
