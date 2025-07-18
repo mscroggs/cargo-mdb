@@ -4,14 +4,12 @@ use std::process::Command;
 fn version_leq(v0: &[usize], v1: &[usize]) -> bool {
     if v0.is_empty() {
         true
+    } else if v1.is_empty() || v0[0] > v1[0] {
+        false
+    } else if v0[0] < v1[0] {
+        true
     } else {
-        if v1.is_empty() || v0[0] > v1[0] {
-            false
-        } else if v0[0] < v1[0] {
-            true
-        } else {
-            version_leq(&v0[1..], &v1[1..])
-        }
+        version_leq(&v0[1..], &v1[1..])
     }
 }
 
