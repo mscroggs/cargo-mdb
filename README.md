@@ -1,15 +1,14 @@
 # cargo-mdb
+[![crates.io](https://img.shields.io/crates/v/cargo-mdb)](https://crates.io/crates/cargo-mdb)
 
 Cargo extension for running the [mdb](https://github.com/TomMelt/mdb) debugger.
 
 ## Installing
 
-The latest development version of cargo-mdb can be installed by running:
+The latest release of cargo-mdb can be installed by running:
 
 ```bash
-git clone https://github.com/mscroggs/cargo-mdb.git
-cd cargo-mdb
-cargo install --path .
+cargo install cargo-mdb
 ```
 
 ## Runnning
